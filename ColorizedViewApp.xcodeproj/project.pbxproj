@@ -12,6 +12,7 @@
 		707837C228325CC9008401F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707837C128325CC9008401F6 /* Assets.xcassets */; };
 		707837C528325CC9008401F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707837C428325CC9008401F6 /* Preview Assets.xcassets */; };
 		707837CC28325CE3008401F6 /* ColorizedRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707837CB28325CE3008401F6 /* ColorizedRectangleView.swift */; };
+		707837CE2832661E008401F6 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707837CD2832661E008401F6 /* SliderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		707837C128325CC9008401F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		707837C428325CC9008401F6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		707837CB28325CE3008401F6 /* ColorizedRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorizedRectangleView.swift; sourceTree = "<group>"; };
+		707837CD2832661E008401F6 /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				707837CB28325CE3008401F6 /* ColorizedRectangleView.swift */,
+				707837CD2832661E008401F6 /* SliderView.swift */,
 				707837BF28325CC7008401F6 /* ContentView.swift */,
 				707837BD28325CC7008401F6 /* ColorizedViewAppApp.swift */,
 				707837C128325CC9008401F6 /* Assets.xcassets */,
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				707837CC28325CE3008401F6 /* ColorizedRectangleView.swift in Sources */,
+				707837CE2832661E008401F6 /* SliderView.swift in Sources */,
 				707837C028325CC7008401F6 /* ContentView.swift in Sources */,
 				707837BE28325CC7008401F6 /* ColorizedViewAppApp.swift in Sources */,
 			);

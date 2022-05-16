@@ -15,9 +15,9 @@ struct ColorizedRectangleView: View {
     let blueValue: Double
     
     var body: some View {
-        let mainColor = Color(red: redValue / 255,
-                                    green: greenValue / 255,
-                                    blue: blueValue / 255)
+        let mainColor = Color(red: redValue,
+                                    green: greenValue,
+                                    blue: blueValue)
         RoundedRectangle(cornerRadius: 10, style: .continuous)
             .frame(width: bounds.width * 0.9, height: bounds.height * 0.3)
             .foregroundColor(mainColor)
@@ -27,6 +27,6 @@ struct ColorizedRectangleView: View {
 
 struct ColorizedRectangleView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorizedRectangleView(redValue: 200, greenValue: 20, blueValue: 120)
+        ColorizedRectangleView(redValue: 0.2, greenValue: 0.15, blueValue: 0.75)
     }
 }
