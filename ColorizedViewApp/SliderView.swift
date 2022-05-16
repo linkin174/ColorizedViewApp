@@ -8,28 +8,17 @@
 import SwiftUI
 
 struct SliderView: View {
-    
-    let sliderColor: Color
     @Binding var sliderValue: Double
-    
+    let sliderColor: Color
+
     var body: some View {
-        VStack{
-            HStack{
-                Text("0")
-                    .font(.title2).bold()
-                    .frame(width: 40, height: 20, alignment: .trailing)
-                Slider(value: $sliderValue)
-                    .tint(sliderColor)
-                Text("255")
-                    .font(.title2).bold()
-                    .frame(width: 40, height: 20, alignment: .trailing)
-            }
-        }
+        Slider(value: $sliderValue, in: 0 ... 255)
+            .tint(sliderColor)
     }
 }
 
 struct SliderView_Previews: PreviewProvider {
     static var previews: some View {
-        SliderView(sliderColor: .green, sliderValue: .constant(0.5))
+        SliderView(sliderValue: .constant(95.5), sliderColor: .green)
     }
 }

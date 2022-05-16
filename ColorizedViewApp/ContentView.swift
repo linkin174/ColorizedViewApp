@@ -7,39 +7,48 @@
 
 import SwiftUI
 
+//class TextFieldText : ObservableObject {
+//    @Published var value: Double = 0.5
+//}
+
 struct ContentView: View {
     
-    @State private var redValue = Double.random(in: 0...1.0)
-    @State private var greenValue = Double.random(in: 0...1.0)
-    @State private var blueValue = Double.random(in: 0...1.0)
-    
-    var body: some View {
+    @State private var redValue: Double = 128
+    @State private var greenValue: Double = 100
+    @State private var blueValue: Double = 28
 
-        VStack(spacing: 48) {
-            ColorizedRectangleView(redValue: redValue, greenValue: greenValue, blueValue: blueValue)
-            sliders
+    var body: some View {
+        ZStack {
+            Color(red: 0.7, green: 0.7, blue: 0.7).ignoresSafeArea()
+            VStack(spacing: 48) {
+                ColorizedRectangleView(redValue: redValue / 255,
+                                       greenValue: greenValue / 255,
+                                       blueValue: blueValue / 255)
+            rgbSliders
+            Spacer()
+            }
         }
     }
-    
-    
 }
 
 extension ContentView {
     private var bounds: CGRect {
         UIScreen.main.bounds
     }
-    private var sliders: some View {
-        VStack(spacing: 20) {
-            SliderView(sliderColor: .red, sliderValue: $redValue)
-            SliderView(sliderColor: .green, sliderValue: $greenValue)
-            SliderView(sliderColor: .blue, sliderValue: $blueValue)
+
+    private var rgbSliders: some View {
+        ZStack {
+            Color(red: 0.9, green: 0.9, blue: 0.9)
+                .shadow(color: .red, radius: 5, x: 0, y: 0)
+            VStack(spacing: 24){
+                ColorSliderView(value: $redValue, color: .red)
+                ColorSliderView(value: $greenValue, color: .green)
+                ColorSliderView(value: $blueValue, color: .blue)
+            }.padding()
         }
-        .padding(8)
-        .frame(width: bounds.width * 0.9, height: bounds.height * 0.3)
-        .background(Color(red: 0.9, green: 0.9, blue: 0.9))
-        .cornerRadius(16)
-        .shadow(color: .black, radius: 10, x: 2, y: 5)
-        
+        .frame(width: bounds.width - 32, height: 200)
+//        .shadow(color: .gray, radius: 3, x: 2, y: 4)
+        .cornerRadius(12)
     }
 }
 
