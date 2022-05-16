@@ -19,7 +19,7 @@ struct ColorizedRectangleView: View {
                                     green: greenValue,
                                     blue: blueValue)
         RoundedRectangle(cornerRadius: 10, style: .continuous)
-            .frame(width: bounds.width * 0.9, height: bounds.height * 0.3)
+            .frame(width: bounds.width - 32, height: bounds.height * 0.2)
             .foregroundColor(mainColor)
             .shadow(color: mainColor, radius: 10, x: 2, y: 5)
     }

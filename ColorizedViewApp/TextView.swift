@@ -14,7 +14,7 @@ struct TextView: View {
     var body: some View {
         Text(String(format: "%.f", value))
             .font(.title2.bold())
-            .frame(width: 60, height: 40, alignment: .center)
+            .frame(width: 50, height: 40, alignment: .center)
     }
 }
 
