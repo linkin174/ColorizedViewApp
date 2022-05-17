@@ -30,6 +30,7 @@ struct BackgroundView: View {
                 .frame(width: frameSize * 0.5)
                 .offset(x: -150, y: -50)
         }.preferredColorScheme(.light)
+            .blur(radius: 20)
     }
 }
 

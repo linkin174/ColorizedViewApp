@@ -7,9 +7,14 @@
 
 import SwiftUI
 
+private func stringFrom(double: Double) -> String {
+    String(format: "%.f", double)
+}
+
 struct ColorSliderView: View {
 
     @Binding var value: Double
+    @Binding var text: String
 
     let sliderColor: Color
 
@@ -39,30 +44,30 @@ struct ColorSliderView: View {
                 .font(.system(size: 14).bold())
                 .foregroundColor(Color.black)
                 .frame(width: 67, height: 30, alignment: .leading)
+            
             Slider(value: $value, in: 0 ... 255)
                 .animation(.default, value: value)
                 .tint(sliderColor)
-            TextField("", text: $value.string)
+                .onChange(of: value) { newValue in
+                    text = stringFrom(double: newValue)
+                }
+                .onAppear {
+                    text = stringFrom(double: value)
+                }
+            
+            TextField("", text: $text)
                 .frame(width: 50, height: 30)
                 .font(.system(size: 14).bold())
                 .foregroundColor(Color.black)
                 .background(border)
                 .multilineTextAlignment(.center)
                 .keyboardType(.numberPad)
-                .onChange(of: value) { _ in value > 255 ? value = 255 : nil }
         }
-    }
-}
-
-extension Double {
-    var string: String {
-        get { String(format: "%.f", self) }
-        set { self = Double(newValue) ?? 0 }
     }
 }
 
 struct ColorSlider_Previews: PreviewProvider {
     static var previews: some View {
-        ColorSliderView(value: .constant(999), sliderColor: .red)
+        ColorSliderView(value: .constant(999), text: .constant("999"), sliderColor: .red)
     }
 }

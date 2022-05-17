@@ -8,20 +8,33 @@
 import SwiftUI
 
 private enum ColorTextField {
-    case redTF, greenTF, blueTF
+    case redTF
+    case greenTF
+    case blueTF
+}
+
+private enum Direction {
+    case up
+    case down
 }
 
 struct ContentView: View {
+
+    @State private var redValue: Double = Double.random(in: 0...255)
+    @State private var greenValue: Double = Double.random(in: 0...255)
+    @State private var blueValue: Double = Double.random(in: 0...255)
     
-    @State private var redValue = Double.random(in: 0...255)
-    @State private var greenValue = Double.random(in: 0...255)
-    @State private var blueValue = Double.random(in: 0...255)
+    @State private var redTFtext = ""
+    @State private var greenTFtext = ""
+    @State private var blueTFtext = ""
+    
+    @State private var isPresented = false
+    
     @FocusState private var focusedField: ColorTextField?
 
     var body: some View {
         ZStack {
             BackgroundView()
-                .blur(radius: 20)
             VStack(spacing: 24) {
                 ColorizedRectangleView(redValue: redValue / 255,
                                        greenValue: greenValue / 255,
@@ -36,11 +49,29 @@ struct ContentView: View {
             ToolbarItemGroup(placement: .keyboard) {
                 upDownButtons
                 Spacer()
-                Button(action: { focusedField = nil },
+                Button(action: { checkInputFor(textFiled: focusedField ?? .redTF) ? focusedField = nil : nil },
                        label: { Text("Done").font(.title3).bold() })
             }
         }
+        .alert("ERROR", isPresented: $isPresented, actions: {}, message: {Text("Enter number in range 0 to 255")})
     }
+
+    private func checkInputFor(textFiled: ColorTextField) -> Bool {
+        switch textFiled {
+        case .redTF:
+            guard let number = Double(redTFtext), number <= 255 else {  isPresented.toggle(); redTFtext = ""; return false}
+            redValue = number
+            return true
+        case .greenTF:
+            guard let number = Double(greenTFtext), number <= 255 else { isPresented.toggle(); greenTFtext = ""; return false}
+            greenValue = number
+            return true
+        case .blueTF:
+            guard let number = Double(blueTFtext), number <= 255 else { isPresented.toggle(); blueTFtext = ""; return false}
+            blueValue = number
+            return true
+    }
+}
 }
 
 extension ContentView {
@@ -50,9 +81,9 @@ extension ContentView {
     
     private var upDownButtons: some View {
         HStack(){
-            Button(action: { previousTF(from: focusedField ?? .redTF) },
+            Button(action: { switchTF(direction: .up)},
                    label: { Image(systemName: "chevron.up") })
-            Button(action: { nextTF(from: focusedField ?? .redTF) },
+            Button(action: { switchTF(direction: .down) },
                    label: { Image(systemName: "chevron.down") })
         }
     }
@@ -64,13 +95,13 @@ extension ContentView {
                 .blendMode(.softLight)
                 .cornerRadius(12)
             VStack(spacing: 24) {
-                ColorSliderView(value: $redValue,
+                ColorSliderView(value: $redValue, text: $redTFtext,
                                 sliderColor: .red)
                     .focused($focusedField, equals: .redTF)
-                ColorSliderView(value: $greenValue,
+                ColorSliderView(value: $greenValue, text: $greenTFtext,
                                 sliderColor: .green)
                     .focused($focusedField, equals: .greenTF)
-                ColorSliderView(value: $blueValue,
+                ColorSliderView(value: $blueValue, text: $blueTFtext,
                                 sliderColor: .blue)
                     .focused($focusedField, equals: .blueTF)
             }
@@ -80,25 +111,20 @@ extension ContentView {
         }
     }
 
-    private func nextTF(from field: ColorTextField) {
-        switch field {
+    private func switchTF(direction: Direction) {
+        switch focusedField {
         case .redTF:
-            focusedField = .greenTF
+            if checkInputFor(textFiled: .redTF) {
+                direction == .down ? (focusedField = .greenTF) : (focusedField = .blueTF)
+            }
         case .greenTF:
-            focusedField = .blueTF
+            if checkInputFor(textFiled: .greenTF) {
+                direction == .down ? (focusedField = .blueTF) : (focusedField = .redTF)
+            }
         default:
-            focusedField = .redTF
-        }
-    }
-
-    private func previousTF(from field: ColorTextField) {
-        switch field {
-        case .redTF:
-            focusedField = .blueTF
-        case .greenTF:
-            focusedField = .redTF
-        default:
-            focusedField = .greenTF
+            if checkInputFor(textFiled: .blueTF) {
+                direction == .down ? (focusedField = .redTF) : (focusedField = .greenTF)
+            }
         }
     }
 }
