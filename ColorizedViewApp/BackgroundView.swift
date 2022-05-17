@@ -29,7 +29,7 @@ struct BackgroundView: View {
                 .foregroundColor(.blue.opacity(0.9))
                 .frame(width: frameSize * 0.5)
                 .offset(x: -150, y: -50)
-        }
+        }.preferredColorScheme(.light)
     }
 }
 

@@ -37,6 +37,7 @@ struct ColorSliderView: View {
         HStack(spacing: 8) {
             Text("\(sliderLabel): \(String(format: "%.f", value))")
                 .font(.system(size: 14).bold())
+                .foregroundColor(Color.black)
                 .frame(width: 67, height: 30, alignment: .leading)
             Slider(value: $value, in: 0 ... 255)
                 .animation(.default, value: value)
@@ -44,6 +45,7 @@ struct ColorSliderView: View {
             TextField("", text: $value.string)
                 .frame(width: 50, height: 30)
                 .font(.system(size: 14).bold())
+                .foregroundColor(Color.black)
                 .background(border)
                 .multilineTextAlignment(.center)
                 .keyboardType(.numberPad)
