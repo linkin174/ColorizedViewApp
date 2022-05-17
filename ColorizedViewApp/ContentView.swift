@@ -12,19 +12,17 @@ private enum ColorTextField {
 }
 
 struct ContentView: View {
+    
     @State private var redValue = Double.random(in: 0...255)
     @State private var greenValue = Double.random(in: 0...255)
     @State private var blueValue = Double.random(in: 0...255)
-
-    @State private var isPresented = false
-
     @FocusState private var focusedField: ColorTextField?
 
     var body: some View {
         ZStack {
             BackgroundView()
                 .blur(radius: 20)
-            VStack(spacing: 48) {
+            VStack(spacing: 24) {
                 ColorizedRectangleView(redValue: redValue / 255,
                                        greenValue: greenValue / 255,
                                        blueValue: blueValue / 255)
@@ -33,12 +31,17 @@ struct ContentView: View {
             }
         }
         .padding(EdgeInsets(top: 32, leading: 0, bottom: 32, trailing: 0))
-        .alert("Error",
-               isPresented: $isPresented,
-               actions: {},
-               message: { Text("Enter number in range from 0 to 255") })
-        .onTapGesture {
-            focusedField = nil
+        .onTapGesture { focusedField = nil }
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Button(action: { previousTF(from: focusedField ?? .redTF) },
+                       label: { Image(systemName: "chevron.up") })
+                Button(action: { nextTF(from: focusedField ?? .redTF) },
+                       label: { Image(systemName: "chevron.down") })
+                Spacer()
+                Button(action: { focusedField = nil },
+                       label: { Text("Done").font(.title3).bold() })
+            }
         }
     }
 }
@@ -51,60 +54,27 @@ extension ContentView {
     private var rgbSliders: some View {
         ZStack {
             Color.white
-                .frame(width: width - 32, height: 200)
+                .frame(width: width - 32, height: 170)
                 .blendMode(.softLight)
                 .cornerRadius(12)
             VStack(spacing: 24) {
                 ColorSliderView(value: $redValue,
-                                editingChanged: { _ in checkInput(for: .redTF) },
                                 sliderColor: .red)
                     .focused($focusedField, equals: .redTF)
                 ColorSliderView(value: $greenValue,
-                                editingChanged: { _ in checkInput(for: .greenTF) },
                                 sliderColor: .green)
                     .focused($focusedField, equals: .greenTF)
                 ColorSliderView(value: $blueValue,
-                                editingChanged: { _ in checkInput(for: .blueTF) },
                                 sliderColor: .blue)
                     .focused($focusedField, equals: .blueTF)
             }
-            .padding(12)
+            .padding()
             .frame(width: width - 32, height: 200)
             .shadow(color: .gray, radius: 10, x: 0, y: 5)
         }
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Button(action: { previousTFSwitch(for: focusedField ?? .redTF) }, label: { Image(systemName: "chevron.up") })
-                Button(action: { nextTFSwitch(for: focusedField ?? .redTF) }, label: { Image(systemName: "chevron.down") })
-                Spacer()
-                Button(action: { focusedField = nil }, label: { Text("Done").font(.title3).bold() })
-            }
-        }
-    }
-    
-    
-    private func checkInput(for textField: ColorTextField) {
-        let randomValue = Double.random(in: 1...255)
-        switch textField {
-        case .redTF:
-            if redValue > 255 {
-                isPresented.toggle()
-                redValue = randomValue
-            }
-        case .greenTF:
-            if greenValue > 255 {
-                isPresented.toggle()
-                greenValue = randomValue
-            }
-        default:
-            if blueValue > 255 {
-                isPresented.toggle()
-                blueValue = randomValue
-            }
-        }
     }
 
-    private func nextTFSwitch(for field: ColorTextField) {
+    private func nextTF(from field: ColorTextField) {
         switch field {
         case .redTF:
             focusedField = .greenTF
@@ -115,7 +85,7 @@ extension ContentView {
         }
     }
 
-    private func previousTFSwitch(for field: ColorTextField) {
+    private func previousTF(from field: ColorTextField) {
         switch field {
         case .redTF:
             focusedField = .blueTF

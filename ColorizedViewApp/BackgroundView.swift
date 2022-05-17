@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BackgroundView: View {
+    //JUST FOR FUN 😃
     private let frameSize = UIScreen.main.bounds.height
     
     var body: some View {
