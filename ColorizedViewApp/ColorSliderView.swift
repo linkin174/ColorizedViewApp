@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ColorSliderView: View {
+
     @Binding var value: Double
 
     let sliderColor: Color
@@ -36,7 +37,7 @@ struct ColorSliderView: View {
         HStack(spacing: 8) {
             Text("\(sliderLabel): \(String(format: "%.f", value))")
                 .font(.system(size: 14).bold())
-                .frame(width: 70, height: 30, alignment: .leading)
+                .frame(width: 67, height: 30, alignment: .leading)
             Slider(value: $value, in: 0 ... 255)
                 .animation(.default, value: value)
                 .tint(sliderColor)

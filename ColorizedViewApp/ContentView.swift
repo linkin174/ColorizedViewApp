@@ -34,10 +34,7 @@ struct ContentView: View {
         .onTapGesture { focusedField = nil }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
-                Button(action: { previousTF(from: focusedField ?? .redTF) },
-                       label: { Image(systemName: "chevron.up") })
-                Button(action: { nextTF(from: focusedField ?? .redTF) },
-                       label: { Image(systemName: "chevron.down") })
+                upDownButtons
                 Spacer()
                 Button(action: { focusedField = nil },
                        label: { Text("Done").font(.title3).bold() })
@@ -49,6 +46,15 @@ struct ContentView: View {
 extension ContentView {
     private var width: CGFloat {
         UIScreen.main.bounds.maxX
+    }
+    
+    private var upDownButtons: some View {
+        HStack(){
+            Button(action: { previousTF(from: focusedField ?? .redTF) },
+                   label: { Image(systemName: "chevron.up") })
+            Button(action: { nextTF(from: focusedField ?? .redTF) },
+                   label: { Image(systemName: "chevron.down") })
+        }
     }
 
     private var rgbSliders: some View {

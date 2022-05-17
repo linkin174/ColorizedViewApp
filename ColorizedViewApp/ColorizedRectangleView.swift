@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ColorizedRectangleView: View {
     
-    let bounds = UIScreen.main.bounds
+    private let bounds = UIScreen.main.bounds
     let redValue: Double
     let greenValue: Double
     let blueValue: Double

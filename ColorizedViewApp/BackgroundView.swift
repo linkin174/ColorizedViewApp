@@ -4,11 +4,12 @@
 //
 //  Created by Aleksandr Kretov on 16.05.2022.
 //
+//JUST FOR FUN 😃
 
 import SwiftUI
 
 struct BackgroundView: View {
-    //JUST FOR FUN 😃
+    
     private let frameSize = UIScreen.main.bounds.height
     
     var body: some View {
@@ -26,7 +27,6 @@ struct BackgroundView: View {
                 .offset(x: 50, y: -300)
             Circle()
                 .foregroundColor(.blue.opacity(0.9))
-//                .opacity(0.9)
                 .frame(width: frameSize * 0.5)
                 .offset(x: -150, y: -50)
         }
