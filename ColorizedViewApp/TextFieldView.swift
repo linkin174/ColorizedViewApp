@@ -8,25 +8,14 @@
 import SwiftUI
 
 struct TextFieldView: View {
-    @Binding var value: Double
-    @State private var isPresented = false
     
-    var body: some View {
-        TextField("", value: $value,
-                  formatter: formatter, onEditingChanged: { _ in checkInput() })
-            .frame(width: 60, height: 40, alignment: .center)
-            .background(border)
-            .font(.title2.bold())
-            .multilineTextAlignment(.center)
-            .keyboardType(.numberPad)
-            .alert("OOPS",
-                   isPresented: $isPresented,
-                   actions: { alertAction },
-                   message: { alertMessage })
-    }
-}
+    @Binding var value: Double
+    let editingChanged: (Bool) -> Void
 
-extension TextFieldView {
+    private var border: some View {
+        RoundedRectangle(cornerRadius: 8)
+            .strokeBorder(.blue, lineWidth: 2)
+    }
     
     private var formatter: NumberFormatter {
         let formatter = NumberFormatter()
@@ -36,28 +25,22 @@ extension TextFieldView {
         return formatter
     }
     
-    private var border: some View {
-        RoundedRectangle(cornerRadius: 8)
-            .strokeBorder(.blue, lineWidth: 2)
+    var body: some View {
+        TextField("", value: $value,
+                  formatter: formatter,
+                  onEditingChanged: editingChanged)
+            .frame(width: 60, height: 40, alignment: .center)
+            .background(border)
+            .font(.system(size: 14).bold())
+            .multilineTextAlignment(.center)
+            .keyboardType(.numberPad)
+            
     }
-    
-    private var alertAction: some View {
-        Button("OK", action: { self.value = Double.random(in: 0...255) })
-    }
-    
-    private var alertMessage: some View {
-        Text("Enter number in range from 0 to 255")
-    }
-    
-    private func checkInput() {
-        if value > 255 {
-            isPresented.toggle()
-        }
-    }
+
 }
 
 struct TextFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        TextFieldView(value: .constant(255))
+        TextFieldView(value: .constant(255), editingChanged: { _ in })
     }
 }

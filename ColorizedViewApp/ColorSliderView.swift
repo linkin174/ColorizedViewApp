@@ -10,15 +10,16 @@ import SwiftUI
 struct ColorSliderView: View {
    
     @Binding var value: Double
-    let color: Color
+    let editingChanged: (Bool) -> Void
+    let sliderColor: Color
     
     var body: some View {
         VStack {
             HStack() {
                 TextView(value: $value)
                 SliderView(sliderValue: $value,
-                           sliderColor: color)
-                TextFieldView(value: $value)
+                           sliderColor: sliderColor)
+                TextFieldView(value: $value, editingChanged: editingChanged)
             }
         }
     }
@@ -26,6 +27,6 @@ struct ColorSliderView: View {
 
 struct ColorSlider_Previews: PreviewProvider {
     static var previews: some View {
-        ColorSliderView(value: .constant(999), color: .red)
+        ColorSliderView(value: .constant(999), editingChanged: { _ in }, sliderColor: .red)
     }
 }

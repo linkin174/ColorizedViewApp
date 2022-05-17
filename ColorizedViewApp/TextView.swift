@@ -10,10 +10,11 @@ import SwiftUI
 struct TextView: View {
     
     @Binding var value: Double
+    @State private var text = ""
     
     var body: some View {
         Text(String(format: "%.f", value))
-            .font(.title2.bold())
+            .font(.system(size: 14).bold())
             .frame(width: 50, height: 40, alignment: .center)
     }
 }

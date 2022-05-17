@@ -12,7 +12,8 @@ struct SliderView: View {
     let sliderColor: Color
 
     var body: some View {
-        Slider(value: $sliderValue, in: 0 ... 255)
+        Slider(value: $sliderValue, in: 0...255)
+            .animation(.default, value: sliderValue)
             .tint(sliderColor)
     }
 }
