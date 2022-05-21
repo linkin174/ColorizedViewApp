@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct ColorizedRectangleView: View {
-    private let bounds = UIScreen.main.bounds
+    
     let redValue: Double
     let greenValue: Double
     let blueValue: Double
 
+    private let bounds = UIScreen.main.bounds
+    
     var body: some View {
-        let mainColor = Color(red: redValue,
-                              green: greenValue,
-                              blue: blueValue)
+        let mainColor = Color(red: redValue / 255,
+                              green: greenValue / 255,
+                              blue: blueValue / 255)
         RoundedRectangle(cornerRadius: 10)
             .frame(width: bounds.width - 32, height: bounds.height * 0.2)
             .foregroundColor(mainColor)
@@ -26,6 +28,6 @@ struct ColorizedRectangleView: View {
 
 struct ColorizedRectangleView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorizedRectangleView(redValue: 0.2, greenValue: 0.15, blueValue: 0.75)
+        ColorizedRectangleView(redValue: 128, greenValue: 100, blueValue: 99)
     }
 }

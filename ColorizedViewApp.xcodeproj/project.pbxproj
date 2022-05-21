@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7072653D28390108002BE1AA /* ToolbarDoneButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7072653C28390108002BE1AA /* ToolbarDoneButtonView.swift */; };
 		707837BE28325CC7008401F6 /* ColorizedViewAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707837BD28325CC7008401F6 /* ColorizedViewAppApp.swift */; };
 		707837C028325CC7008401F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707837BF28325CC7008401F6 /* ContentView.swift */; };
 		707837C228325CC9008401F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707837C128325CC9008401F6 /* Assets.xcassets */; };
@@ -14,9 +15,11 @@
 		707837CC28325CE3008401F6 /* ColorizedRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707837CB28325CE3008401F6 /* ColorizedRectangleView.swift */; };
 		707837D62832B832008401F6 /* ColorSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707837D52832B832008401F6 /* ColorSliderView.swift */; };
 		708E41CA2832C41400F1C22D /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708E41C92832C41400F1C22D /* BackgroundView.swift */; };
+		708E41E6283557E800F1C22D /* ToolbarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708E41E5283557E800F1C22D /* ToolbarButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7072653C28390108002BE1AA /* ToolbarDoneButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarDoneButtonView.swift; sourceTree = "<group>"; };
 		707837BA28325CC7008401F6 /* ColorizedViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorizedViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		707837BD28325CC7008401F6 /* ColorizedViewAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorizedViewAppApp.swift; sourceTree = "<group>"; };
 		707837BF28325CC7008401F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -25,6 +28,7 @@
 		707837CB28325CE3008401F6 /* ColorizedRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorizedRectangleView.swift; sourceTree = "<group>"; };
 		707837D52832B832008401F6 /* ColorSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSliderView.swift; sourceTree = "<group>"; };
 		708E41C92832C41400F1C22D /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		708E41E5283557E800F1C22D /* ToolbarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 				707837CB28325CE3008401F6 /* ColorizedRectangleView.swift */,
 				707837D52832B832008401F6 /* ColorSliderView.swift */,
 				707837BF28325CC7008401F6 /* ContentView.swift */,
+				708E41E5283557E800F1C22D /* ToolbarButtonView.swift */,
+				7072653C28390108002BE1AA /* ToolbarDoneButtonView.swift */,
 				707837BD28325CC7008401F6 /* ColorizedViewAppApp.swift */,
 				707837C128325CC9008401F6 /* Assets.xcassets */,
 				707837C328325CC9008401F6 /* Preview Content */,
@@ -146,6 +152,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				708E41E6283557E800F1C22D /* ToolbarButtonView.swift in Sources */,
+				7072653D28390108002BE1AA /* ToolbarDoneButtonView.swift in Sources */,
 				707837CC28325CE3008401F6 /* ColorizedRectangleView.swift in Sources */,
 				708E41CA2832C41400F1C22D /* BackgroundView.swift in Sources */,
 				707837C028325CC7008401F6 /* ContentView.swift in Sources */,

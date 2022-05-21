@@ -7,14 +7,10 @@
 
 import SwiftUI
 
-private func stringFrom(double: Double) -> String {
-    String(format: "%.f", double)
-}
-
 struct ColorSliderView: View {
-
     @Binding var value: Double
-    @Binding var text: String
+    @State var text: String = ""
+    @State private var isPresent = false
 
     let sliderColor: Color
 
@@ -33,41 +29,51 @@ struct ColorSliderView: View {
         return output
     }
 
-    private var border: some View {
-        RoundedRectangle(cornerRadius: 8)
-            .strokeBorder(.blue, lineWidth: 2)
-    }
-
     var body: some View {
         HStack(spacing: 8) {
-            Text("\(sliderLabel): \(String(format: "%.f", value))")
+            Text("\(sliderLabel): \(lround(value))")
                 .font(.system(size: 14).bold())
                 .foregroundColor(Color.black)
                 .frame(width: 67, height: 30, alignment: .leading)
-            
+
             Slider(value: $value, in: 0 ... 255)
                 .animation(.default, value: value)
                 .tint(sliderColor)
                 .onChange(of: value) { newValue in
-                    text = stringFrom(double: newValue)
+                    text = "\(lround(newValue))"
                 }
-                .onAppear {
-                    text = stringFrom(double: value)
-                }
-            
-            TextField("", text: $text)
-                .frame(width: 50, height: 30)
-                .font(.system(size: 14).bold())
-                .foregroundColor(Color.black)
-                .background(border)
-                .multilineTextAlignment(.center)
-                .keyboardType(.numberPad)
+
+            TextField("", text: $text, onEditingChanged: { _ in
+                checkInput()
+            })
+            .frame(width: 50, height: 30)
+            .font(.system(size: 14).bold())
+            .foregroundColor(Color.black)
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(.blue, lineWidth: 2))
+            .multilineTextAlignment(.center)
+            .keyboardType(.numberPad)
+            .onAppear {
+                text = "\(lround(value))"
+            }
+            .alert("Wrong input", isPresented: $isPresent, actions: {}) {
+                Text("Enter number in range from 0 to 255")
+            }
         }
+    }
+
+    private func checkInput() {
+        guard let number = Int(text), (0 ... 255).contains(number) else {
+            isPresent.toggle()
+            value = Double.random(in: 0 ... 255)
+            text = String(value)
+            return
+        }
+        value = Double(number)
     }
 }
 
 struct ColorSlider_Previews: PreviewProvider {
     static var previews: some View {
-        ColorSliderView(value: .constant(999), text: .constant("999"), sliderColor: .red)
+        ColorSliderView(value: .constant(999), sliderColor: .red)
     }
 }
